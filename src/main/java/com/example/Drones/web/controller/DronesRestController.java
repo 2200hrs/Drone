@@ -17,7 +17,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/drones")
+@RequestMapping(value = "/drone", produces = "application/json", consumes = "application/json")
 public class DronesRestController {
     @Autowired
     private IDroneService droneService;
@@ -31,12 +31,24 @@ public class DronesRestController {
         return ResponseEntity;
     }
 
-    @PutMapping("/{serialNumber}/load")
-    public void loadMedications(@PathVariable String serialNumber, @RequestBody List<Medication> medications) throws ChangeSetPersister.NotFoundException {
-        droneService.load( medications,serialNumber);
+//    @PutMapping("/{serialNumber}/load")
+//    public void loadMedications(@RequestParam("serialNumber")String serialNumber,@RequestParam("medications") List<Medication> medications) throws ChangeSetPersister.NotFoundException {
+//        droneService.load( medications,serialNumber);
+//    }
+
+
+    @PostMapping("/{serialNumber}/load")
+    public ResponseEntity<Drone> loadDrone(@PathVariable String serialNumber,
+                                           @RequestBody List<Medication> medications) {
+        try {
+            Drone loadedDrone = droneService.load(medications, serialNumber);
+            return ResponseEntity.ok(loadedDrone);
+        } catch (ChangeSetPersister.NotFoundException e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
-    @GetMapping("/{serialNumber}/medications")
+    @GetMapping("loadedMedications/{serialNumber}")
     public ResponseEntity<List<DroneMedication>> getLoadedMedications(@PathVariable String serialNumber) {
         return ResponseEntity.ok(droneService.getLoadedMedications(serialNumber));
     }
@@ -47,7 +59,7 @@ public class DronesRestController {
         return ResponseEntity.ok(droneService.getAvailableDrones());
     }
 
-    @GetMapping("/{serialNumber}/battery")
+    @GetMapping("/battery/{serialNumber}")
     public double getBatteryLevel(@PathVariable String serialNumber) {
         return droneService.getBatteryLevel(serialNumber);
     }

@@ -1,6 +1,6 @@
 package com.example.Drones.web.controller;
 
-import com.example.Drones.persistance.model.Drone;
+
 import com.example.Drones.persistance.model.ImageModel;
 import com.example.Drones.persistance.model.Medication;
 import com.example.Drones.service.IMedicationService;
@@ -10,13 +10,11 @@ import com.example.Drones.web.utils.ResourceNotFoundException;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 import java.util.zip.DataFormatException;

@@ -1,16 +1,15 @@
-#server:
-#  port: 8888
-spring:
-  datasource:
-    url: jdbc:mysql://localhost:3306/drone_test?createDatabaseIfNotExist=true&useSSL=false
-    username: newuser
-    password: password
-    driver-class-name: com.mysql.cj.jdbc.Driver
-  jpa:
-    hibernate:
-      ddl-auto: update
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQL8Dialect
-        jdbc:
-          time_zone:Africa/Harare
+#
+#spring:
+#  datasource:
+#    url: jdbc:mysql://{db_host}/dbtest?createDatabaseIfNotExist=true&useSSL=false
+#    username: {db_user}
+#    password: {db_password}
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#    properties:
+#      hibernate:
+#        dialect: org.hibernate.dialect.MySQL8Dialect
+#        jdbc:
+#          time_zone:Africa/Harare

@@ -1,44 +1,16 @@
-version: "3.2"
-
+version: '3.8'
 services:
-  server:
-    build:
-      context: ./server
-      dockerfile: Dockerfile
-    ports:
-      - 4040:8080
+  db:
+    image: mysql:8.0.26
     restart: always
-    container_name: drone_server
-    networks:
-      - ds-network
-    depends_on:
-      - mysql
-
-  mysql:
-    image: mysql
-    ports:
-      - 3306:3306
-    volumes:
-      - ds-mysql:/var/lib/mysql
-    restart: always
-    container_name: ds_mysql
-    networks:
-      - ds-network
     environment:
-      MYSQL_ROOT_PASSWORD: 1234
-      MYSQL_DATABASE: drone
-
-  adminer:
-    image: adminer
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_USER: newuser
+      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: dbtest
+    volumes:
+      - db-data:/var/lib/mysql
     ports:
-      - 9001:8080
-    restart: always
-    container_name: ims_adminer
-    networks:
-      - ims-network
-
+      - "3308:3306"
 volumes:
-  ims-mysql:
-
-networks:
-  ims-network:
+  db-data:
